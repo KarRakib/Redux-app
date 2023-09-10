@@ -1,17 +1,16 @@
-import { Provider } from "react-redux";
-import { RouterProvider } from "react-router-dom";
-import store from "./redux/store";
-import routes from "./routes/routes";
-
+import { useState } from 'react'
+import './App.css'
+import { RouterProvider } from 'react-router-dom'
+import route from './Router/Router'
 
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <div>
-      <Provider store={store}>
-        <RouterProvider router={routes} />
-      </Provider>
-    </div>
-  );
+    <>
+    <RouterProvider router={route}/>
+    </>
+  )
 }
 
-export default App;
+export default App

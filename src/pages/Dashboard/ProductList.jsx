@@ -1,19 +1,16 @@
-import { useState } from "react";
-import { useEffect } from "react";
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import deleteProduct from "../../redux/thunk/products/deleteProduct";
+// import loadProductData from "../../redux/thunk/products/fetchProducts";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
+  // const products = useSelector((state) => state.product.products);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetch("http://localhost:5000/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data.data));
-  });
-
+  
   return (
     <div className='flex flex-col justify-center items-center h-full w-full '>
-      <div className='w-full max-w-7xl mx-auto rounded-lg  bg-white shadow-lg border border-gray-200'>
+      {/* <div className='w-full max-w-7xl mx-auto rounded-lg  bg-white shadow-lg border border-gray-200'>
         <header className='px-5 py-4 border-b border-gray-100'>
           <div className='font-semibold text-gray-800'>Products</div>
         </header>
@@ -42,8 +39,7 @@ const ProductList = () => {
             </thead>
 
             <tbody className='text-sm divide-y divide-gray-100'>
-              {products?.map(({ model, brand, price, status, _id }) => (
-                // eslint-disable-next-line react/jsx-key
+              {products.map(({ model, brand, price, status, _id }) => (
                 <tr>
                   <td className='p-2'>
                     <input type='checkbox' className='w-5 h-5' value='id-1' />
@@ -70,7 +66,7 @@ const ProductList = () => {
                   </td>
                   <td className='p-2'>
                     <div className='flex justify-center'>
-                      <button>
+                      <button onClick={() => dispatch(deleteProduct(_id))}>
                         <svg
                           className='w-8 h-8 hover:text-blue-600 rounded-full hover:bg-gray-100 p-1'
                           fill='none'
@@ -79,7 +75,7 @@ const ProductList = () => {
                           xmlns='http://www.w3.org/2000/svg'
                         >
                           <path
-                            stroke-line cap='round'
+                            stroke-linecap='round'
                             stroke-linejoin='round'
                             stroke-width='2'
                             d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
@@ -93,7 +89,7 @@ const ProductList = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
     </div>
     // </section>
   );

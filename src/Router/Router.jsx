@@ -1,15 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../layout/Main/Main";
-import Home from "../pages/Main/Home";
-import About from "../pages/Main/About";
-import TopRated from "../pages/Main/TopRated";
-import Cart from "../pages/Main/Cart";
 import Dashboard from "../layout/Dashboard/Dashboard";
-import ProductList from "../pages/Dashboard/ProductList";
+import Main from "../layout/Main/Main";
 import AddProduct from "../pages/Dashboard/AddProduct";
+import ProductList from "../pages/Dashboard/ProductList";
+import About from "../pages/Main/About";
+import Cart from "../pages/Main/Cart";
+import Home from "../pages/Main/Home";
+import TopRated from "../pages/Main/TopRated";
 
-
-const routes = createBrowserRouter([
+const route = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
@@ -48,4 +47,4 @@ const routes = createBrowserRouter([
   },
 ]);
 
-export default routes;
+export default route;
