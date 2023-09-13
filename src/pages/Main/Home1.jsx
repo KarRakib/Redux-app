@@ -5,63 +5,47 @@ import { useEffect } from "react";
 import { getProducts } from "../../Redux/features/productsSlice";
 
 
-const Home = () => {
-  const { products } = useSelector(state => state.products)
-  console.log('check',products);
+const Home1 = () => {
+const {products}= useSelector(state=> state.products)
   const filter = useSelector(state => state.filters)
-  const { brands, inStock, keyword } = filter
-  //  check anOther
-  
-  const filterData = () => {
-    return products.filter((item) => {
-      // Filter by status
-      if (brands !== 'all' && item.brand !== brands) {
-        return false;
-      }
-
-      // Filter by search query (case-insensitive)
-      if (keyword && item.model.toLowerCase().includes(keyword.toLowerCase())) {
-        return false;
-      }
-
-      return true;
-    });
-  };
-
-  const filteredData = filterData();
-  console.log('chcek', filteredData);
-
-  const dispatch = useDispatch();
-  console.log(filter);
-  useEffect(() => {
+ const {brands, inStock} = filter
+const dispatch = useDispatch()
+useEffect(() => {
     dispatch(getProducts())
   }, [dispatch]);
-
-  let content;
-  console.log('check keno', { content });
-  if (products?.length) {
-    content = products.map((product) => (
+let content ;
+if (products?.length) {
+    // Start with all products
+    let filteredProducts = products;
+  
+    // Filter by keyword
+    if (filter.keyword) {
+      const keywordLower = filter.keyword.toLowerCase();
+      filteredProducts = filteredProducts.filter((product) =>
+        product.model.toLowerCase().includes(keywordLower)
+      );
+    }
+  
+    // Filter by inStock
+    if (filter.inStock) {
+      filteredProducts = filteredProducts.filter((product) => product.status === true);
+    }
+  
+    // Filter by brands
+    if (filter.brands.length > 0) {
+      filteredProducts = filteredProducts.filter((product) =>
+        filter.brands.includes(product.brand)
+      );
+    }
+  
+    // Create content with the filtered products
+  content = filteredProducts.map((product) => (
       <ProductCard key={product.model} product={product} />
     ));
   }
-  if (products.length && (filter.inStock || filter.brands.length)) {
-    content = products.filter((product) => {
-      if (inStock) {
-        return product.status === true;
-      }
-      return product;
-    }).filter((product) => {
-      if (filter.brands.length) {
-        return filter.brands.includes(product.brand)
-      }
-      return product;
-    })
 
-      .map((product) => <ProductCard key={product.model} product={product} />)
-  }
-  const activeClass = "text-white bg-indigo-500 border-white";
-
-  return (
+const activeClass = "text-white bg-indigo-500 border-white";
+    return (
     <div className='max-w-7xl gap-14 mx-auto my-10'>
       <div className='mb-10 flex justify-end gap-5'>
         <button
@@ -73,7 +57,7 @@ const Home = () => {
           In Stock
         </button>
         <button
-          onClick={() => dispatch(toggleBrands("Amd"))}
+          onClick={() => dispatch(toggleBrands("amd"))}
           className={`border px-3 py-2 rounded-full font-semibold ${brands.includes("amd") ? activeClass : null
             }`}
         >
@@ -95,4 +79,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home1;

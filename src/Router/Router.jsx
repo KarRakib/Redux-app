@@ -7,6 +7,8 @@ import About from "../pages/Main/About";
 import Cart from "../pages/Main/Cart";
 import Home from "../pages/Main/Home";
 import TopRated from "../pages/Main/TopRated";
+import FilteredDataComponent from "../../test";
+import Home1 from "../pages/Main/Home1";
 
 const route = createBrowserRouter([
   {
@@ -15,11 +17,11 @@ const route = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home1 />,
       },
       {
         path: "about",
-        element: <About />,
+        element: <FilteredDataComponent />,
       },
       {
         path: "top-rated",

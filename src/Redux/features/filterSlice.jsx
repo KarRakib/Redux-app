@@ -19,10 +19,13 @@ const filterSlice = createSlice({
             } else {
                 state.brands = state.brands.filter(brand => brand !== payload); // Remove the brand
             }
+        },
+        changeKeyword:(state,{payload})=>{
+            state.keyword = payload
         }
         
 
     }
 })
-export const { toggleStock, toggleBrands } = filterSlice.actions
+export const { toggleStock, toggleBrands,changeKeyword } = filterSlice.actions
 export default filterSlice.reducer;
